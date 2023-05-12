@@ -16,9 +16,18 @@ public class MyHashTable <K, V> {
     private int M = 11;// default number of chain
     private int size;
 
-    public MyHashTable(){}
-    public MyHashTable(int M){}
-
+    public MyHashTable(){
+        chainArray = new HashNode[M];
+        for(int i = 0; i < M; i++){
+            chainArray[i] = null;
+        }
+    }
+    public MyHashTable(int M){
+        chainArray = new HashNode[M];
+        for(int i = 0; i < M; i++){
+            chainArray[i] = null;
+        }
+    }
     private int hash(K key){return 0;}
     public void put(K key, V value){}
     public V get(K key){return null;}
