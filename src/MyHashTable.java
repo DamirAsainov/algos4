@@ -1,3 +1,5 @@
+import org.w3c.dom.Node;
+
 public class MyHashTable <K, V> {
     private class HashNode<K, V>{
         private K key;
@@ -28,8 +30,24 @@ public class MyHashTable <K, V> {
             chainArray[i] = null;
         }
     }
-    private int hash(K key){return 0;}
-    public void put(K key, V value){}
+    private int hash(K key){
+        return key.hashCode() % M;
+    }
+    public void put(K key, V value){
+        int hs = hash(key);
+        HashNode hashNode = new HashNode(key, value);
+        if(chainArray[hs] == null){
+            chainArray[hs] = hashNode;
+        }
+        else{
+            HashNode currentNode = new HashNode(key, value);
+            while(currentNode.next != null){
+                currentNode = currentNode.next;
+            }
+            currentNode.next = hashNode;
+        }
+        System.out.println("Da");
+    }
     public V get(K key){return null;}
     public V remove(K key){return null;}
     public boolean contains(V value){return false;}
