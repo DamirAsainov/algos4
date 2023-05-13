@@ -23,6 +23,7 @@ public class MyHashTable <K, V> {
         }
     }
     public MyHashTable(int M){
+        this.M = M;
         chainArray = new HashNode[M];
         for(int i = 0; i < M; i++){
             chainArray[i] = null;
@@ -166,4 +167,13 @@ public class MyHashTable <K, V> {
     * Returns actual size of hash table
     * @return field size
      */
+    public int numOfItemsInRow(int row){
+        int sum = 0;
+        HashNode currentNode =  chainArray[row];
+        while (currentNode != null){
+            sum++;
+            currentNode = currentNode.next;
+        }
+        return sum;
+    }
 }
