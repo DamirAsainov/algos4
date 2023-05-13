@@ -102,5 +102,22 @@ public class MyHashTable <K, V> {
         }
         return false;
     }
-    public K getKey(V value){return null;}
+    public K getKey(V value){
+        for(int i = 0; i < M; i++){
+            if(chainArray[i] == null){
+                continue;
+            }
+            if(chainArray[i].value == value){
+                return chainArray[i].key;
+            }
+            HashNode currentNode = chainArray[i];
+            while (currentNode.next != null){
+                if(currentNode.value == value || currentNode.next.value == value){
+                    return (K) currentNode.key;
+                }
+                currentNode = currentNode.next;
+            }
+        }
+        return null;
+    }
 }

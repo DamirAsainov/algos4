@@ -16,6 +16,7 @@ public class Main {
         System.out.println("remove - " + hashTable.remove("Lou"));
         System.out.println(hashTable.get("Lou"));
         System.out.println(hashTable.contains(8));
+        System.out.println(hashTable.getKey(3));
 
 
     }
