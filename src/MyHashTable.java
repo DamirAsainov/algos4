@@ -1,5 +1,3 @@
-import org.w3c.dom.Node;
-
 public class MyHashTable <K, V> {
     private class HashNode<K, V>{
         private K key;
@@ -33,6 +31,12 @@ public class MyHashTable <K, V> {
     private int hash(K key){
         return key.hashCode() % M;
     }
+    /*
+     * Returns the hash value for a given key.
+     * @param key the key to be hashed
+     * @return the hash value
+     */
+
     public void put(K key, V value){
         int hs = hash(key);
         HashNode hashNode = new HashNode(key, value);
@@ -48,6 +52,12 @@ public class MyHashTable <K, V> {
         }
         size++;
     }
+    /*
+     * Adds a new key-value pair to the hash table. If there are multiple nodes
+     * that hash to the same index, the new node is added to the end of the linked list.
+     * @param key the key to add
+     * @param value the value to add
+     */
     public V get(K key){
         int hs = hash(key);
         if(chainArray[hs] == null){
@@ -63,6 +73,12 @@ public class MyHashTable <K, V> {
             return null;
         }
     }
+    /*
+     * Returns the value associated with a given key in the hash table.
+     * @param key the key to search for
+     * @return the value associated with the key, or null if the key is not found
+     */
+
     public V remove(K key){
         int hs = hash(key);
         V valueReturn = null;
@@ -87,6 +103,12 @@ public class MyHashTable <K, V> {
         size--;
         return valueReturn;
     }
+    /*
+     Removes the key-value pair corresponding to the given key
+     @param key the key
+     @return the value associated with the key, or null if the key is not found
+     */
+
     public boolean contains(V value){
         for(int i = 0; i < M; i++){
             if(chainArray[i] == null){
@@ -105,6 +127,13 @@ public class MyHashTable <K, V> {
         }
         return false;
     }
+    /*
+     * Returns true if the hash table contains a node with the given value,
+     * and false otherwise.
+     * @param value the value to search for in the hash table
+     * @return true if the hash table contains the value, false otherwise
+     */
+
     public K getKey(V value){
         for(int i = 0; i < M; i++){
             if(chainArray[i] == null){
@@ -123,8 +152,18 @@ public class MyHashTable <K, V> {
         }
         return null;
     }
+    /*
+     * Returns the key of the node containing the specified value,
+     * or null if the value is not found in the hash table.
+     * @param value the value to search for in the hash table
+     * @return the key of the node containing the value, or null if the value is not found
+     */
 
     public int getSize() {
         return size;
     }
+    /*
+    * Returns actual size of hash table
+    * @return field size
+     */
 }
