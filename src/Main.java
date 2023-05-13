@@ -12,11 +12,13 @@ public class Main {
         hashTable.put("Rae", 9);
         hashTable.put("Max", 10);
         hashTable.put("Tod", 11);
-        System.out.println(hashTable.get("Tim"));
-        System.out.println("remove - " + hashTable.remove("Lou"));
-        System.out.println(hashTable.get("Lou"));
-        System.out.println(hashTable.contains(8));
-        System.out.println(hashTable.getKey(3));
+        System.out.println("Tim - " + hashTable.get("Tim"));
+        System.out.println("remove 'Lou' - " + hashTable.remove("Lou"));
+        System.out.println("Lou - " + hashTable.get("Lou"));
+        System.out.println("8 in hash table - " + hashTable.contains(8));
+        System.out.println("2 in hash table - " + hashTable.contains(2));
+        System.out.println("Key of 3 - " + hashTable.getKey(3));
+        System.out.println("Hash Table size - " + hashTable.getSize());
 
 
     }

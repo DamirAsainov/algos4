@@ -16,7 +16,7 @@ public class MyHashTable <K, V> {
     }
     private HashNode<K, V>[] chainArray;
     private int M = 11;// default number of chain
-    private int size;
+    private int size = 0;
 
     public MyHashTable(){
         chainArray = new HashNode[M];
@@ -46,6 +46,7 @@ public class MyHashTable <K, V> {
             }
             currentNode.next = hashNode;
         }
+        size++;
     }
     public V get(K key){
         int hs = hash(key);
@@ -71,6 +72,7 @@ public class MyHashTable <K, V> {
         if(chainArray[hs].key == key){
             valueReturn = chainArray[hs].value;
             chainArray[hs] = chainArray[hs].next;
+            size--;
             return valueReturn;
         }
         HashNode currentNode = chainArray[hs];
@@ -82,6 +84,7 @@ public class MyHashTable <K, V> {
         }
         valueReturn = (V) currentNode.next.value;
         currentNode.next = null;
+        size--;
         return valueReturn;
     }
     public boolean contains(V value){
@@ -119,5 +122,9 @@ public class MyHashTable <K, V> {
             }
         }
         return null;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
