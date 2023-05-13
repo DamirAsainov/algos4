@@ -46,7 +46,6 @@ public class MyHashTable <K, V> {
             }
             currentNode.next = hashNode;
         }
-        System.out.println("Da");
     }
     public V get(K key){
         int hs = hash(key);
@@ -58,20 +57,35 @@ public class MyHashTable <K, V> {
             while (currentNode.next != null && !currentNode.key.equals(key)){
                 currentNode = currentNode.next;
             }
-            return (V) currentNode.value;
+            if(currentNode.key == key)
+                return (V) currentNode.value;
+            return null;
         }
     }
     public V remove(K key){
         int hs = hash(key);
+        V valueReturn = null;
         if(chainArray[hs] == null){
             return null;
         }
-        else {
-            HashNode currentNode = chainArray[hs];
-            chainArray[hs] = currentNode.next;
-            return (V) currentNode.value;
+        if(chainArray[hs].key == key){
+            valueReturn = chainArray[hs].value;
+            chainArray[hs] = chainArray[hs].next;
+            return valueReturn;
         }
+        HashNode currentNode = chainArray[hs];
+        while (!currentNode.next.key.equals(key)){
+            if(currentNode == null){
+                return null;
+            }
+            currentNode = currentNode.next;
+        }
+        valueReturn = (V) currentNode.next.value;
+        currentNode.next = null;
+        return valueReturn;
     }
-    public boolean contains(V value){return false;}
+    public boolean contains(V value){
+        return false;
+    }
     public K getKey(V value){return null;}
 }

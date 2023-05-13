@@ -1,13 +1,19 @@
 public class Main {
     public static void main(String[] args) {
         MyHashTable<String, Integer> hashTable = new MyHashTable<>();
-        hashTable.put("DAAA", 121);
-        hashTable.put("DAAA", 124);
-        hashTable.put("2", 12304);
-        hashTable.put("2", 999);
-        System.out.println(hashTable.get("DAAA"));
-        System.out.println(hashTable.get("2"));
-        System.out.println(hashTable.remove("DAAA"));
-        System.out.println(hashTable.get("DAAA"));
+        hashTable.put("Zoe", 1);
+        hashTable.put("Bea", 2);
+        hashTable.put("Tim", 3);
+        hashTable.put("Mia", 4);
+        hashTable.put("Sue", 5);
+        hashTable.put("Len", 6);
+        hashTable.put("Moe", 7);
+        hashTable.put("Lou", 8);
+        hashTable.put("Rae", 9);
+        hashTable.put("Max", 10);
+        hashTable.put("Tod", 11);
+        System.out.println("remove - " + hashTable.remove("Bue"));
+        System.out.println(hashTable.get("Lou"));
+
     }
 }
