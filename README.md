@@ -145,15 +145,10 @@ private int M = 11;
 private int size = 0;
 ```
 ## Private Methods
-`getHash` - return hash value for the key 
-
-`getIndex` - return index to chainArray for the given key
+`hash` - return hash value for the key 
 ```java
-private int getHash(K key){
-        return key.hashCode();
-    }
-    private int getIndex(K key){
-        return getHash(key) % M;
+private int hash(K key){
+        return key.hashCode() % M;
     }
 ```
 
@@ -166,23 +161,18 @@ private int getHash(K key){
 
 `value` - value to be associated with the specified key
 ```java
-public void put(K key, V value){
-        int index = getIndex(key);
-        if(chainArray[index] == null){
-            chainArray[index] = new HashNode<>(key, value);
+  public void put(K key, V value){
+        int hs = hash(key);
+        HashNode hashNode = new HashNode(key, value);
+        if(chainArray[hs] == null){
+            chainArray[hs] = hashNode;
         }
         else{
-            HashNode<K, V> currentNode = chainArray[index];
-            while(currentNode != null){
-                if(currentNode.key.equals(key)){
-                    currentNode.value = value;
-                    return;
-                }
+            HashNode currentNode = chainArray[hs];
+            while(currentNode.next != null){
                 currentNode = currentNode.next;
             }
-            HashNode<K, V> newNode = new HashNode<>(key, value);
-            newNode.next = chainArray[index];
-            chainArray[index] = newNode;
+            currentNode.next = hashNode;
         }
         size++;
     }
@@ -196,15 +186,19 @@ public void put(K key, V value){
 `return` - the value to which the specified key is mapped, or null if this map contains no mapping for the key
 ```java
 public V get(K key){
-        int index = getIndex(key);
-        HashNode<K, V> currentNode = chainArray[index];
-        while(currentNode != null){
-            if(currentNode.key.equals(key)){
-                return currentNode.value;
-            }
-            currentNode = currentNode.next;
+        int hs = hash(key);
+        if(chainArray[hs] == null){
+            return null;
         }
-        return null;
+        else{
+            HashNode currentNode = chainArray[hs];
+            while (currentNode.next != null && !currentNode.key.equals(key)){
+                currentNode = currentNode.next;
+            }
+            if(currentNode.key == key)
+                return (V) currentNode.value;
+            return null;
+        }
     }
 ```
 `remove(K key)` - Removes the mapping for the specified key from this hash table if present.
@@ -213,24 +207,29 @@ public V get(K key){
 
 `key` - key whose mapping is to be removed from the map
 ```java
-public void remove(K key){
-        int index = getIndex(key);
-        HashNode<K, V> currentNode = chainArray[index];
-        HashNode<K, V> prevNode = null;
-        while(currentNode != null){
-            if(currentNode.key.equals(key)){
-                if(prevNode == null){
-                    chainArray[index] = currentNode.next;
-                }
-                else{
-                    prevNode.next = currentNode.next;
-                }
-                size--;
-                return;
+   public V remove(K key){
+        int hs = hash(key);
+        V valueReturn = null;
+        if(chainArray[hs] == null){
+            return null;
+        }
+        if(chainArray[hs].key == key){
+            valueReturn = chainArray[hs].value;
+            chainArray[hs] = chainArray[hs].next;
+            size--;
+            return valueReturn;
+        }
+        HashNode currentNode = chainArray[hs];
+        while (!currentNode.next.key.equals(key)){
+            if(currentNode == null){
+                return null;
             }
-            prevNode = currentNode;
             currentNode = currentNode.next;
         }
+        valueReturn = (V) currentNode.next.value;
+        currentNode.next = null;
+        size--;
+        return valueReturn;
     }
 ```
 `contains(V value)` - Returns true if this hash table contains a mapping for the specified key.
