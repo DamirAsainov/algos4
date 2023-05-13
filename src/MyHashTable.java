@@ -85,6 +85,21 @@ public class MyHashTable <K, V> {
         return valueReturn;
     }
     public boolean contains(V value){
+        for(int i = 0; i < M; i++){
+            if(chainArray[i] == null){
+                continue;
+            }
+            if(chainArray[i].value == value){
+                return true;
+            }
+            HashNode currentNode = chainArray[i];
+            while (currentNode.next != null){
+                if(currentNode.value == value || currentNode.next.value == value){
+                    return true;
+                }
+                currentNode = currentNode.next;
+            }
+        }
         return false;
     }
     public K getKey(V value){return null;}
