@@ -23,6 +23,9 @@ public class Main {
         System.out.println("2 in hash table - " + hashTable.contains(2));
         System.out.println("Key of 3 - " + hashTable.getKey(3));
         System.out.println("Hash Table size - " + hashTable.getSize());
+        hashTable.replace("Tim", "Key");
+        System.out.println(hashTable.get("Key"));
+        System.out.println(hashTable.get("Tim"));
 
         int rows = 11;
         String[] NAMES = {"Damir", "Asain", "Mansur", "DaBaby", "Asanali", "Karina", "Chakir", "Yesken", "Timur", "Tyson", "Daryn", "Logan", "Abay", "Darina", "Karima", "Assima", "Dauren", "Daulet", "Abylai", "Carter", "Danik", "WAter", "Sanjar", "Erkeldy", "Aldiar", "Beka", "Rakhat", "Olzhas", "Aslan", "Levi", "Ackerman", "Hinata", "Naruto", "Goky", "Sasuke", "Itachi", "Eren", "Messi", "Ronaldy", "Son", "Kane", "Maguire", "S1mple", "Dosia", "Evangelion", "Ada", "Yashin", "Henry", "Maksim", "Ryan", "Gosling"};
