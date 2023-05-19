@@ -176,4 +176,39 @@ public class MyHashTable <K, V> {
         }
         return sum;
     }
+    public void replace(K preKey, K newKey){
+        int hs = hash(preKey);
+        HashNode node = null;
+        if(chainArray[hs] == null){
+            return;
+        }
+        if(chainArray[hs].key == preKey){
+            node = chainArray[hs];
+            chainArray[hs] = chainArray[hs].next;
+        }
+        else {
+            HashNode currentNode = chainArray[hs];
+            while (!currentNode.next.key.equals(preKey)) {
+                if (currentNode == null) {
+                    return;
+                }
+                currentNode = currentNode.next;
+            }
+            node = currentNode.next;
+            currentNode.next = currentNode.next.next;
+        }
+        node.key = newKey;
+        hs = hash(newKey);
+        if(chainArray[hs] == null){
+            chainArray[hs] = node;
+        }
+        else{
+            HashNode currentNode = chainArray[hs];
+            while(currentNode.next != null){
+                currentNode = currentNode.next;
+            }
+            currentNode.next = node;
+        }
+
+    }
 }
